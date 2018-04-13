@@ -1,6 +1,10 @@
 package taggame;
 
+import java.io.File;
+import static taggame.Display.playSound;
+
 public class Controller {
+
     Display display = new Display();
     Player player;
     Room startRoom;                 //RUM 1
@@ -24,62 +28,73 @@ public class Controller {
     Room bossRoom;                  //RUM 19    
     Room endRoom;                   //RUM 21
 
+    File Door = new File("door.wav");
+    File HeartBeat = new File("heartbeat.wav");
+    File HountedHouse = new File("hauntedhouse.wav");
+
     public void start() throws InterruptedException {
-        createRoom();        
+        createRoom();
+        playSound(HeartBeat);
+        playSound(HeartBeat);
         player = new Player(display.nameInput(), 100);
         player.setLocation(startRoom);
+        playSound(HountedHouse);
         display.welcomeMessage();
         System.out.println(player.getLocation().getDescription());
-        
-        while(true) {
+
+        while (true) {
             playerControl();
         }
-    }        
-       
-    private void nextRoom(String way) throws InterruptedException { 
+    }
+
+    private void nextRoom(String way) throws InterruptedException {
         Room room = player.getLocation();
         switch (way) {
-                case "north":        
-                if (room.getEast() != null) {                    
-                    player.setLocation(player.getLocation().getNorth());                    
-                    display.transitText();
-                    System.out.println(room.getDescription());
-                } else {
-                    System.out.println("There is no door!");
-                }
-                break;  
-                case "south":        
-                if (room.getEast() != null) {                    
-                    player.setLocation(player.getLocation().getSouth());                    
+            case "north":
+                if (room.getEast() != null) {
+                    player.setLocation(player.getLocation().getNorth());
+                    playSound(Door);
                     display.transitText();
                     System.out.println(room.getDescription());
                 } else {
                     System.out.println("There is no door!");
                 }
                 break;
-                case "east":        
-                if (room.getEast() != null) {                    
-                    player.setLocation(player.getLocation().getEast());                    
+            case "south":
+                if (room.getEast() != null) {
+                    player.setLocation(player.getLocation().getSouth());
+                    playSound(Door);
                     display.transitText();
                     System.out.println(room.getDescription());
                 } else {
                     System.out.println("There is no door!");
                 }
                 break;
-                case "west":        
-                if (room.getEast() != null) {                    
-                    player.setLocation(player.getLocation().getWest());                    
+            case "east":
+                if (room.getEast() != null) {
+                    player.setLocation(player.getLocation().getEast());
+                    playSound(Door);
                     display.transitText();
                     System.out.println(room.getDescription());
                 } else {
                     System.out.println("There is no door!");
                 }
                 break;
+            case "west":
+                if (room.getEast() != null) {
+                    player.setLocation(player.getLocation().getWest());
+                    playSound(Door);
+                    display.transitText();
+                    System.out.println(room.getDescription());
+                } else {
+                    System.out.println("There is no door!");
+                }
+                break;
+        }
     }
-    }
-    
+
     public void playerControl() throws InterruptedException {
-        switch(display.playerInput()) {
+        switch (display.playerInput()) {
             case "north":
             case "n":
                 nextRoom("north");
@@ -105,10 +120,11 @@ public class Controller {
                 display.Exit();
         }
     }
-    
+
     public void ifWinCondition() {
-        if(player.getLocation().equals(endRoom))
+        if (player.getLocation().equals(endRoom)) {
             System.exit(0);
+        }
     }
 
     public void createRoom() {
@@ -202,9 +218,7 @@ public class Controller {
         //Rum 19
         bossRoom.setNorth(tortureRoom);
         //Rum20
-        
 
     }
-        
-    
+
 }

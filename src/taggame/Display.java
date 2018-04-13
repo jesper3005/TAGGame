@@ -1,6 +1,9 @@
 package taggame;
 
+import java.io.File;
 import java.util.Scanner;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class Display {
     Scanner sc = new Scanner(System.in);        
@@ -55,5 +58,24 @@ public class Display {
     
     public void takeAction() {
         
+    }
+    public static void slowPrint(String text) throws InterruptedException{
+        for (int i = 0; i < text.length(); i++) {
+            System.out.print(text.charAt(i));
+            Thread.sleep(250);
+        }
+    }
+     static void playSound(File Sound) {
+
+        try {
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(Sound));
+            clip.start();
+
+            Thread.sleep(clip.getMicrosecondLength()/1000);
+        } catch (Exception e)
+        {
+        }
+
     }
 }
