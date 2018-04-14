@@ -38,8 +38,8 @@ public class Controller {
         playSound(HeartBeat);
         player = new Player(display.nameInput(), 100);
         player.setLocation(startRoom);
-        playSound(HountedHouse);
         display.welcomeMessage();
+        playSound(HountedHouse);
         System.out.println(player.getLocation().getDescription());
 
         while (true) {
