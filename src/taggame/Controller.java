@@ -28,9 +28,9 @@ public class Controller {
     Room bossRoom;                  //RUM 19    
     Room endRoom;                   //RUM 21
 
-    File Door = new File("door.wav");
-    File HeartBeat = new File("heartbeat.wav");
-    File HountedHouse = new File("hauntedhouse.wav");
+//    File Door = new File("door.wav");
+//    File HeartBeat = new File("heartbeat.wav");
+//    File HountedHouse = new File("hauntedhouse.wav");
 
     public void start() throws InterruptedException {
         createRoom();
